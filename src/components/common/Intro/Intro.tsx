@@ -14,7 +14,12 @@ const Intro = () => {
 			<Container>
 				<div className={styles.intro__content}>
 					<div className={styles.intro__image}>
-						<Image layout='fill' alt='intro image' url='/images/intro.png' />
+						<Image
+							priority={true}
+							layout='fill'
+							alt='intro image'
+							url='/images/intro.png'
+						/>
 						<ToTop />
 					</div>
 					<div className={styles.intro__info}>
