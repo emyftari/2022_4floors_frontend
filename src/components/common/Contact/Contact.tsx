@@ -84,19 +84,15 @@ const Contact = () => {
 					>
 						<h1>Contacteer ons</h1>
 						<fieldset>
-							<input type='text' placeholder='Naam' {...register('naam')} />
-							{errors.naam && <p>{errors.naam.message}</p>}
+							<input type='text' placeholder='E-mail' {...register('email')} />
+							{errors.email && <p>{errors.email.message}</p>}
 						</fieldset>
 						<div className={styles.two__column}>
 							<fieldset>
-								<input
-									type='text'
-									placeholder='E-mail'
-									{...register('email')}
-								/>
-								{errors.email && <p>{errors.email.message}</p>}
+								<input type='text' placeholder='Naam' {...register('naam')} />
+								{errors.naam && <p>{errors.naam.message}</p>}
 							</fieldset>
-							<fieldset>
+							<fieldset className={styles.select}>
 								<select {...register('select')}>
 									<option value='particulier'>Professional</option>
 									<option value='particulier'>Particulier</option>
@@ -106,7 +102,8 @@ const Contact = () => {
 						</div>
 						<fieldset>
 							<textarea
-								rows={2}
+								style={{ resize: 'none' }}
+								rows={4}
 								placeholder='Bericht'
 								{...register('bericht')}
 							></textarea>

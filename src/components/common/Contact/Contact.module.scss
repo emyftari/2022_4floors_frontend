@@ -81,6 +81,10 @@
 			}
 		}
 
+		select {
+			background-color: $clr-accent-dark;
+		}
+
 		.checkbox {
 			display: flex;
 			align-items: center;
@@ -112,6 +116,7 @@
 				margin-right: 1rem;
 				appearance: none;
 				margin-bottom: 0;
+				border: 0;
 
 				&::before,
 				&::after {
