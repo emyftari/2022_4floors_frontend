@@ -1,4 +1,4 @@
-import { useState, createRef } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
 
 import * as yup from 'yup'
@@ -36,7 +36,8 @@ const schema = yup.object({
 })
 
 const Contact = () => {
-	const recaptchaRef = createRef<any>()
+	const recaptchaRef = useRef<any>()
+	const [token, setToken] = useState<null | string>(null)
 	const [submitMessage, setSubmitMessage] = useState<null | string>(null)
 	const {
 		reset,
@@ -48,35 +49,36 @@ const Contact = () => {
 	})
 
 	const onReCAPTCHAChange = (captchaCode: any) => {
-		if (!captchaCode) {
-			return
-		}
-		recaptchaRef.current.reset()
+		setToken(captchaCode)
 	}
 
 	const onSubmit = async (data: IFormInputs) => {
 		setSubmitMessage(null)
-		try {
-			recaptchaRef.current.execute()
-			const response = await fetch(
-				`https://formsubmit.co/ajax/myftarierand@gmail.com`,
-				{
-					method: 'POST',
-					body: JSON.stringify(data),
-					headers: {
-						'Content-Type': 'application/json'
+		if (!token) {
+			setSubmitMessage('Please complete recaptcha!')
+			setTimeout(() => setSubmitMessage(null), 5000)
+		} else {
+			try {
+				const response = await fetch(
+					`https://formsubmit.co/ajax/tom@fold.com`,
+					{
+						method: 'POST',
+						body: JSON.stringify(data),
+						headers: {
+							'Content-Type': 'application/json'
+						}
 					}
+				)
+				if (response.ok) {
+					setSubmitMessage('Jouw bericht is succesvol verstuurd!')
+					reset()
+					setTimeout(() => setSubmitMessage(null), 5000)
 				}
-			)
-			if (response.ok) {
-				setSubmitMessage('Jouw bericht is succesvol verstuurd!')
-				reset()
-				setTimeout(() => setSubmitMessage(null), 5000)
+			} catch (e) {
+				setSubmitMessage(
+					'Er is iets fout gelopen met het formulier. Probeer opnieuw.'
+				)
 			}
-		} catch (e) {
-			setSubmitMessage(
-				'Er is iets fout gelopen met het formulier. Probeer opnieuw.'
-			)
 		}
 	}
 
@@ -142,17 +144,18 @@ const Contact = () => {
 								4floors.
 							</label>
 						</div>
+						<ReCAPTCHA
+							className='recaptcha'
+							theme='dark'
+							ref={recaptchaRef}
+							sitekey='6LcIMeEgAAAAACsndF79MY4xXloXGTRt5D8r1Z5O'
+							size='normal'
+							onChange={onReCAPTCHAChange}
+						/>
 						<Button type={ButtonTypes.primary}>
 							<button type='submit'>Versturen</button>
 						</Button>
 						{submitMessage && <p>{submitMessage}</p>}
-						<ReCAPTCHA
-							ref={recaptchaRef}
-							// size='invisible'
-							size='normal'
-							sitekey='6LfLt-AgAAAAAP7n0H925Yt5TyHe_eSwmFn3lWZ8'
-							onChange={onReCAPTCHAChange}
-						/>
 					</form>
 				</div>
 			</Container>
