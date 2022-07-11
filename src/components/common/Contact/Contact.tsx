@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, createRef } from 'react'
 import Link from 'next/link'
 
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import styles from './Contact.module.scss'
 
@@ -34,6 +36,7 @@ const schema = yup.object({
 })
 
 const Contact = () => {
+	const recaptchaRef = createRef<any>()
 	const [submitMessage, setSubmitMessage] = useState<null | string>(null)
 	const {
 		reset,
@@ -44,16 +47,27 @@ const Contact = () => {
 		resolver: yupResolver(schema)
 	})
 
+	const onReCAPTCHAChange = (captchaCode: any) => {
+		if (!captchaCode) {
+			return
+		}
+		recaptchaRef.current.reset()
+	}
+
 	const onSubmit = async (data: IFormInputs) => {
 		setSubmitMessage(null)
 		try {
-			const response = await fetch(`https://formsubmit.co/ajax/tom@fold.eu`, {
-				method: 'POST',
-				body: JSON.stringify(data),
-				headers: {
-					'Content-Type': 'application/json'
+			recaptchaRef.current.execute()
+			const response = await fetch(
+				`https://formsubmit.co/ajax/myftarierand@gmail.com`,
+				{
+					method: 'POST',
+					body: JSON.stringify(data),
+					headers: {
+						'Content-Type': 'application/json'
+					}
 				}
-			})
+			)
 			if (response.ok) {
 				setSubmitMessage('Jouw bericht is succesvol verstuurd!')
 				reset()
@@ -132,6 +146,13 @@ const Contact = () => {
 							<button type='submit'>Versturen</button>
 						</Button>
 						{submitMessage && <p>{submitMessage}</p>}
+						<ReCAPTCHA
+							ref={recaptchaRef}
+							// size='invisible'
+							size='normal'
+							sitekey='6LfLt-AgAAAAAP7n0H925Yt5TyHe_eSwmFn3lWZ8'
+							onChange={onReCAPTCHAChange}
+						/>
 					</form>
 				</div>
 			</Container>
