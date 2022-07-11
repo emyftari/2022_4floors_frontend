@@ -1,0 +1,11 @@
+.header {
+	height: 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	svg {
+		width: 120px;
+		height: auto;
+	}
+}

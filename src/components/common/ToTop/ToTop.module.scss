@@ -1,0 +1,19 @@
+@import 'styles/variables';
+
+.toTop {
+	position: absolute;
+	width: 124px;
+	height: 124px;
+	background-color: $clr-accent-dark;
+	right: -20px;
+	bottom: -20px;
+	display: grid;
+	place-content: center;
+	cursor: pointer;
+}
+
+@media screen and (max-width: $md) {
+	.toTop {
+		display: none;
+	}
+}

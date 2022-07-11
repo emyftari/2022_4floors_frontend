@@ -1,0 +1,75 @@
+@import 'styles/variables';
+
+.intro {
+	height: 100vh;
+	background-color: $clr-gray;
+
+	&__content {
+		height: calc(100vh - 200px);
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	&__info {
+		position: absolute;
+		max-width: 570px;
+		padding: 6.875rem 6.25rem;
+		color: #fff;
+		background-color: $clr-accent-dark;
+		z-index: 1;
+
+		h2 {
+			margin-bottom: 1.25rem;
+		}
+
+		p {
+			margin-bottom: 2.5rem;
+		}
+
+		span {
+			width: 100%;
+		}
+	}
+
+	&__image {
+		position: relative;
+		width: 80%;
+		height: 100%;
+	}
+}
+
+@media screen and (min-width: 1650px) {
+	.intro {
+		&__content {
+			position: relative;
+		}
+	}
+}
+
+@media screen and (min-width: $sm) {
+	.intro {
+		&__info {
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			max-width: 570px;
+		}
+	}
+}
+
+@media screen and (max-width: $sm) {
+	.intro {
+		&__content {
+			position: relative;
+		}
+
+		&__info {
+			padding: 2rem 1rem;
+			bottom: -60px;
+		}
+
+		&__image {
+			width: 100%;
+		}
+	}
+}
