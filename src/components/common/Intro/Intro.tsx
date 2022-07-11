@@ -20,8 +20,8 @@ const Intro = () => {
 					<div className={styles.intro__info}>
 						<h2>We zijn er bijna!</h2>
 						<p>
-							Lorem ipsum dolor sit amet, consect etur adipiscing elit, sed do
-							eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							We zijn volop bezig met onze Renaissance en ook met onze nieuwe
+							website. Hou dus onze website zeker in de gaten. Tot binnenkort!
 						</p>
 						<Button type={ButtonTypes.primary}>
 							<a href='#contact'>Contacteer ons</a>
