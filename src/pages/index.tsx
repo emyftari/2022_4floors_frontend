@@ -8,7 +8,7 @@ const HomePage: NextPage = () => {
 	return (
 		<>
 			<NextSeo
-				title='Home - 4Floors'
+				title='4floors.pro | Passion for Professionals'
 				description='We zijn volop bezig met onze Renaissance en ook met onze nieuwe
 				website. Hou dus onze website zeker in de gaten. Tot binnenkort!'
 				canonical='https://4floors.be'
