@@ -60,7 +60,7 @@ const Contact = () => {
 		} else {
 			try {
 				const response = await fetch(
-					`https://formsubmit.co/ajax/tom@fold.eu`,
+					`https://formsubmit.co/ajax/info@4floors.pro`,
 					{
 						method: 'POST',
 						body: JSON.stringify(data),
