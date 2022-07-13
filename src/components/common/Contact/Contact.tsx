@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
@@ -137,7 +138,7 @@ const Contact = () => {
 							</label>
 							{errors.privacybeleid && <p>{errors.privacybeleid.message}</p>}
 						</div>
-						<div className={styles.checkbox}>
+						<div className={clsx(styles.checkbox, styles.checkbox__two)}>
 							<input id='news' type='checkbox' {...register('newsletter')} />
 							<label htmlFor='news'>
 								Ik zou graag op de hoogte blijven van producten en nieuws van
